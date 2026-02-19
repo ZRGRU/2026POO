@@ -34,7 +34,8 @@ Aplicação dos conceitos usando uma linguagem orientada a objetos.
 - **Seminários**
 
 ## Aulas (links)
-- [Aula 01](./aulas/01-introducao-typescript.md)
+- [Aula 01](./aulas/aula01/01-introducao-typescript.md)
+- [Aula 02](./aulas/aula02/02-introducao-typescript.md)
 
 ---
 
