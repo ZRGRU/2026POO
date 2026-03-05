@@ -16,5 +16,12 @@
     "@types/node": "^25.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "compilerOptions": {
+    "types": ["node"],
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "target": "ES2020"
   }
 }
+

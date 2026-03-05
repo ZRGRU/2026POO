@@ -2,6 +2,30 @@
 
 Este material reúne as explicações teóricas sobre **Tipos Básicos**, **Inferência vs Anotação** e **Funções e Tipos** em TypeScript, para consulta e estudo.
 
+
+---
+
+### 1.0 Exemplo: bug silencioso em JavaScript vs erro em TypeScript
+
+Quando você não tipa (JavaScript), alguns erros passam “em silêncio”.  
+Em TypeScript, o mesmo problema aparece **na hora** (no editor/compilação).
+
+**Arquivo:** `ex01.js`
+```js
+function soma(a, b) {
+  return a + b;
+}
+console.log(soma("10", 2)); // "102" (bug silencioso)
+```
+
+**Arquivo:** `ex01.ts`
+```ts
+function soma(a: number, b: number) {
+  return a + b;
+}
+soma("10", 2); // erro de tipo
+```
+
 ---
 
 ## 1) Tipos básicos em TypeScript
@@ -53,6 +77,34 @@ Em TypeScript, **tipo** é a “categoria” de dado que uma variável pode arma
 - **`never`**  
   Usado em funções que **nunca terminam normalmente** (ex.: sempre lançam erro, ou loop infinito).
 
+
+---
+
+### 1.4 Exemplo: tipos básicos, arrays, tuplas e `enum`
+
+**Arquivo:** `tipos.ts`
+```ts
+let ativo: boolean = true;
+let idade: number = 20;
+let nome: string = "Ana";
+
+let notas: number[] = [8, 9.5, 7];
+let tags: Array<string> = ["poo", "typescript", "ifpr"];
+
+// tupla
+let coordenada: [number, number] = [25.40, -54.00];
+
+// enum (opcional, mas bom para mostrar)
+enum Perfil {
+  ADMIN = "ADMIN",
+  USER = "USER"
+}
+let perfil: Perfil = Perfil.USER;
+
+console.log({ ativo, idade, nome, notas, tags, coordenada, perfil });
+```
+
+
 ---
 
 ## 2) Inferência vs Anotação
@@ -92,6 +144,27 @@ Quando usar anotação?
   - o tipo precisar ser mais restrito,
   - você estiver definindo contratos de função,
   - você quiser aumentar a legibilidade do código.
+
+
+---
+
+### 2.4 Exemplo: inferência e anotação de tipos
+
+**Arquivo:** `inferencia.ts`
+```ts
+let curso = "TADS"; // inferido como string
+// curso = 10; // erro
+
+let ano: number; // anotação explícita
+ano = 2025;
+
+function dobro(x: number) {
+  return x * 2; // retorno inferido como number
+}
+
+console.log(dobro(10));
+```
+
 
 ---
 
@@ -134,6 +207,72 @@ Use `never` quando a função:
 Por que isso importa?
 - Ajuda o TypeScript a entender fluxos do programa
 - Melhora validações e tratamento de erros em projetos maiores
+
+
+---
+
+### 3.5 Exemplo: funções com retorno, `void` e `never`
+
+**Arquivo:** `funcoes.ts`
+```ts
+function somar(a: number, b: number): number {
+  return a + b;
+}
+
+const subtrair = (a: number, b: number): number => a - b;
+
+function logar(mensagem: string): void {
+  console.log(mensagem);
+}
+
+function falha(motivo: string): never {
+  throw new Error(motivo);
+}
+
+console.log(somar(2, 3));
+logar("OK");
+// falha("Erro proposital");
+```
+
+
+
+---
+
+## 4) Modelagem de tipos: `interface` e `type`
+
+Em projetos reais, além de tipos básicos, você vai modelar “formatos” de dados (objetos) e criar **conjuntos de valores possíveis** (ex.: turma/estado/status).  
+Normalmente:
+- **`interface`**: ótimo para descrever o “contrato” de objetos e permitir extensão.
+- **`type`**: ótimo para composições (uniões/interseções), aliases e tipos mais complexos.
+
+### 4.1 Exemplo: contrato de objeto (`interface`) e união de valores (`type`)
+
+**Arquivo:** `modelagem.ts`
+```ts
+// interface: ótima para "contratos" de objetos
+interface Aluno {
+  id: number;
+  nome: string;
+  email?: string; // opcional
+  ativo: boolean;
+}
+
+// type: ótimo para composições e tipos mais complexos
+type Turma = "1TADS" | "2TADS" | "3TADS";
+
+const a1: Aluno = {
+  id: 1,
+  nome: "Igor",
+  ativo: true
+};
+
+function matricular(aluno: Aluno, turma: Turma) {
+  return `${aluno.nome} matriculado(a) na turma ${turma}`;
+}
+
+console.log(matricular(a1, "1TADS"));
+```
+
 
 ---
 
