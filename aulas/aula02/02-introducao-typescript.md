@@ -1,11 +1,101 @@
-# Aula 02 — Introdução ao TypeScript (conceitos)
+# Aula 02 — Introdução ao TypeScript (conceitos + prática)
 
-Este material reúne as explicações teóricas sobre **Tipos Básicos**, **Inferência vs Anotação** e **Funções e Tipos** em TypeScript, para consulta e estudo.
-
+Este material reúne uma introdução **prática** (como criar um projeto TS do zero e rodar o primeiro código) e, em seguida, as explicações **teóricas** sobre **Tipos Básicos**, **Inferência vs Anotação** e **Funções e Tipos** em TypeScript.
 
 ---
 
-### 1.0 Exemplo: bug silencioso em JavaScript vs erro em TypeScript
+## Sumário
+- [0) Criando um projeto TypeScript do zero](#0-criando-um-projeto-typescript-do-zero)
+- [1) Primeiro código](#1-primeiro-código)
+- [2) Exemplo: bug silencioso em JavaScript vs erro em TypeScript](#2-exemplo-bug-silencioso-em-javascript-vs-erro-em-typescript)
+- [3) Tipos básicos em TypeScript](#3-tipos-básicos-em-typescript)
+- [4) Inferência vs Anotação](#4-inferência-vs-anotação)
+- [5) Funções e tipos em TypeScript](#5-funções-e-tipos-em-typescript)
+- [6) Modelagem de tipos: interface e type](#6-modelagem-de-tipos-interface-e-type)
+- [Resumo para estudo](#resumo-para-estudo)
+
+---
+
+## 0) Criando um projeto TypeScript do zero
+
+> Objetivo: ter um projeto simples com **TypeScript + ts-node**, para executar arquivos `.ts` diretamente no terminal (modo dev) e gerar build para rodar com Node (modo produção).
+
+### 0.1 Criar pasta e inicializar o npm
+
+```bash
+mkdir aula01-typescript
+cd aula01-typescript
+npm init -y
+```
+
+### 0.2 Instalar TypeScript e dependências de desenvolvimento
+
+```bash
+npm i -D typescript ts-node @types/node
+```
+
+### 0.3 Gerar o `tsconfig.json`
+
+```bash
+npx tsc --init
+```
+
+### 0.4 Criar a pasta `src/`
+
+```bash
+mkdir src
+```
+
+### 0.5 Scripts no `package.json`
+
+No `package.json`, adicione scripts:
+
+```json
+{
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  }
+}
+```
+
+> Observação importante: o script `start` espera o arquivo compilado em `dist/index.js`.  
+> Se o seu `tsconfig.json` ainda não estiver com `outDir`/`rootDir`, configure (recomendado):
+> - `"rootDir": "./src"`
+> - `"outDir": "./dist"`
+
+---
+
+## 1) Primeiro código
+
+Crie o arquivo `src/index.ts`:
+
+```ts
+console.log("Olá TypeScript!");
+
+const nome = "Exemplo";
+const idade = 18;
+
+console.log(`${nome} tem ${idade} anos.`);
+```
+
+### Como executar
+
+- **Modo desenvolvimento (executa TS direto):**
+  ```bash
+  npm run dev
+  ```
+
+- **Build + execução com Node:**
+  ```bash
+  npm run build
+  npm start
+  ```
+
+---
+
+## 2) Exemplo: bug silencioso em JavaScript vs erro em TypeScript
 
 Quando você não tipa (JavaScript), alguns erros passam “em silêncio”.  
 Em TypeScript, o mesmo problema aparece **na hora** (no editor/compilação).
@@ -28,11 +118,11 @@ soma("10", 2); // erro de tipo
 
 ---
 
-## 1) Tipos básicos em TypeScript
+## 3) Tipos básicos em TypeScript
 
 Em TypeScript, **tipo** é a “categoria” de dado que uma variável pode armazenar. Ao declarar (ou inferir) um tipo, o TypeScript passa a **validar** o que pode (ou não) ser atribuído àquela variável, ajudando a detectar erros **antes de executar** o código.
 
-### 1.1 Tipos primitivos mais comuns
+### 3.1 Tipos primitivos mais comuns
 
 - **`string`**  
   Representa textos, como nomes, mensagens e descrições.
@@ -48,7 +138,7 @@ Em TypeScript, **tipo** é a “categoria” de dado que uma variável pode arma
   - `undefined`: variável não inicializada / valor não definido.  
   - `null`: “vazio intencional” (você define explicitamente como vazio).
 
-### 1.2 Tipos úteis no dia a dia
+### 3.2 Tipos úteis no dia a dia
 
 - **Arrays tipados**  
   Permitem criar listas com um tipo único, garantindo consistência.
@@ -61,7 +151,7 @@ Em TypeScript, **tipo** é a “categoria” de dado que uma variável pode arma
 - **`enum`**  
   Um conjunto fechado de valores nomeados. É útil para padronizar estados e evitar “strings soltas” espalhadas no código.
 
-### 1.3 Tipos que exigem atenção
+### 3.3 Tipos que exigem atenção
 
 - **`any`**  
   Desativa a verificação de tipos (o TS aceita qualquer coisa).  
@@ -77,10 +167,7 @@ Em TypeScript, **tipo** é a “categoria” de dado que uma variável pode arma
 - **`never`**  
   Usado em funções que **nunca terminam normalmente** (ex.: sempre lançam erro, ou loop infinito).
 
-
----
-
-### 1.4 Exemplo: tipos básicos, arrays, tuplas e `enum`
+### 3.4 Exemplo: tipos básicos, arrays, tuplas e `enum`
 
 **Arquivo:** `tipos.ts`
 ```ts
@@ -104,12 +191,11 @@ let perfil: Perfil = Perfil.USER;
 console.log({ ativo, idade, nome, notas, tags, coordenada, perfil });
 ```
 
-
 ---
 
-## 2) Inferência vs Anotação
+## 4) Inferência vs Anotação
 
-### 2.1 Inferência de tipos
+### 4.1 Inferência de tipos
 **Inferência** é quando o TypeScript “descobre” automaticamente o tipo com base no valor atribuído.
 
 Vantagens:
@@ -120,9 +206,7 @@ Vantagens:
 Quando usar inferência?
 - Quando o tipo é óbvio pelo valor inicial (por exemplo: texto → `string`, número → `number`).
 
----
-
-### 2.2 Anotação de tipos
+### 4.2 Anotação de tipos
 **Anotação** é quando você declara explicitamente o tipo usando `: tipo`.
 
 Vantagens:
@@ -135,9 +219,7 @@ Quando usar anotação?
 3. **Em parâmetros de função** (boa prática e padrão de projeto)  
 4. **Quando o retorno da função precisa ficar explícito** (contrato/legibilidade)
 
----
-
-### 2.3 Regra prática (para projetos)
+### 4.3 Regra prática (para projetos)
 - Use **inferência** quando o tipo já estiver evidente.
 - Use **anotação** quando:
   - não houver valor inicial,
@@ -145,10 +227,7 @@ Quando usar anotação?
   - você estiver definindo contratos de função,
   - você quiser aumentar a legibilidade do código.
 
-
----
-
-### 2.4 Exemplo: inferência e anotação de tipos
+### 4.4 Exemplo: inferência e anotação de tipos
 
 **Arquivo:** `inferencia.ts`
 ```ts
@@ -165,10 +244,9 @@ function dobro(x: number) {
 console.log(dobro(10));
 ```
 
-
 ---
 
-## 3) Funções e tipos em TypeScript
+## 5) Funções e tipos em TypeScript
 
 Funções são um dos pontos mais importantes para tipagem, porque nelas definimos claramente:
 - **o que entra** (parâmetros)
@@ -178,7 +256,7 @@ Funções são um dos pontos mais importantes para tipagem, porque nelas definim
 
 Tipar funções ajuda a criar um **contrato**, evitando chamadas erradas, melhorando autocompletar e tornando a refatoração mais segura.
 
-### 3.1 Tipando parâmetros
+### 5.1 Tipando parâmetros
 Ao tipar os parâmetros, você garante que a função será chamada com dados do tipo correto.
 
 Benefícios:
@@ -186,7 +264,7 @@ Benefícios:
 - Melhora autocompletar e leitura do código
 - Facilita manutenção do sistema
 
-### 3.2 Tipando retorno
+### 5.2 Tipando retorno
 Tipar o retorno define claramente **o que a função devolve**.
 
 Quando é útil deixar explícito?
@@ -194,12 +272,12 @@ Quando é útil deixar explícito?
 - Quando muitas pessoas trabalham no mesmo código
 - Quando você quer garantir consistência (contratos e padrões)
 
-### 3.3 `void`: funções sem retorno
+### 5.3 `void`: funções sem retorno
 Use `void` quando a função:
 - executa uma ação (ex.: imprimir, logar, salvar, chamar API)
 - **não devolve** um valor para uso posterior
 
-### 3.4 `never`: funções que não finalizam normalmente
+### 5.4 `never`: funções que não finalizam normalmente
 Use `never` quando a função:
 - sempre lança erro (`throw`)
 - ou entra em loop infinito
@@ -208,10 +286,7 @@ Por que isso importa?
 - Ajuda o TypeScript a entender fluxos do programa
 - Melhora validações e tratamento de erros em projetos maiores
 
-
----
-
-### 3.5 Exemplo: funções com retorno, `void` e `never`
+### 5.5 Exemplo: funções com retorno, `void` e `never`
 
 **Arquivo:** `funcoes.ts`
 ```ts
@@ -234,18 +309,16 @@ logar("OK");
 // falha("Erro proposital");
 ```
 
-
-
 ---
 
-## 4) Modelagem de tipos: `interface` e `type`
+## 6) Modelagem de tipos: interface e type
 
 Em projetos reais, além de tipos básicos, você vai modelar “formatos” de dados (objetos) e criar **conjuntos de valores possíveis** (ex.: turma/estado/status).  
 Normalmente:
 - **`interface`**: ótimo para descrever o “contrato” de objetos e permitir extensão.
 - **`type`**: ótimo para composições (uniões/interseções), aliases e tipos mais complexos.
 
-### 4.1 Exemplo: contrato de objeto (`interface`) e união de valores (`type`)
+### 6.1 Exemplo: contrato de objeto (`interface`) e união de valores (`type`)
 
 **Arquivo:** `modelagem.ts`
 ```ts
@@ -272,7 +345,6 @@ function matricular(aluno: Aluno, turma: Turma) {
 
 console.log(matricular(a1, "1TADS"));
 ```
-
 
 ---
 
