@@ -38,6 +38,10 @@ Aplicação dos conceitos usando uma linguagem orientada a objetos.
 - [Aula 02](./aulas/aula02/02-introducao-typescript.md)
 - [Aula 03](./aulas/aula03/03-entrada-dados-typescript.md)
 
+
+## Atividades (links)
+- [Atv01 - 1º Bim](./atividades/1bim/atv01.md)
+
 ---
 
 ## Comunicação e dúvidas
