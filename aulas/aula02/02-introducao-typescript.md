@@ -56,6 +56,14 @@ No `package.json`, adicione scripts:
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts"
+  },
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "types": [
+      "node"
+    ],
+    "verbatimModuleSyntax": false
   }
 }
 ```
