@@ -183,21 +183,6 @@ No dia da entrega do trabalho, **cada aluno deverá apresentar o código**, expl
 - Como as validações foram implementadas e por quê (regras, mensagens, `throw new Error`)
 - Como o programa trata erros (`try/catch/finally`) e garante o fechamento do IO
 
-Durante a apresentação, o aluno deverá responder **às perguntas do professor** sobre:
-- Tipagem (por que `Promise<string>`, por que `number`, etc.)
-- Conversão e validação de entradas
-- Boas práticas (separação de responsabilidades, mensagens de erro, legibilidade)
-
-> Observação: a nota considera tanto o funcionamento quanto a capacidade de explicar a implementação.
-
----
-
-## Desafios (extra – se sobrar tempo)
-1) Permitir cadastrar **3 alunos** e imprimir um array `Aluno[]` no final  
-2) Calcular a **média de idade** dos alunos cadastrados  
-3) Perguntar se deseja cadastrar outro aluno (`s/n`)  
-4) Validar email (opcional): precisa conter `@` e `.`  
-
 ---
 
 ## Entrega
