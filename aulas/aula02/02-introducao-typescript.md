@@ -73,6 +73,27 @@ No `package.json`, adicione scripts:
 > - `"rootDir": "./src"`
 > - `"outDir": "./dist"`
 
+### 0.6 Scripts no `tsconfig.json`
+
+No `package.json`, adicione scripts:
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2020",
+    "types": ["node"],
+
+    "strict": true,
+    "verbatimModuleSyntax": false,
+
+    "sourceMap": true,
+    "skipLibCheck": true
+  }
+}
+```
+
 ---
 
 ## 1) Primeiro código
