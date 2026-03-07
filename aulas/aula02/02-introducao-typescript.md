@@ -75,7 +75,7 @@ No `package.json`, adicione scripts:
 
 ### 0.6 Scripts no `tsconfig.json`
 
-No `package.json`, adicione scripts:
+No `tsconfig.json`, adicione scripts:
 
 ```json
 {
