@@ -1,75 +1,81 @@
-# Aula — Orientação a Objetos com TypeScript
+# Aula 04 — Orientação a Objetos com TypeScript (classes, objetos, atributos, métodos e modificadores de acesso)
 
-## Objetivos da aula
-
-Ao final desta aula, o estudante deverá ser capaz de:
-
-- compreender o conceito de orientação a objetos;
-- diferenciar classe e objeto;
-- declarar classes em TypeScript;
-- criar atributos e métodos;
-- instanciar objetos com `new`;
-- aplicar modificadores de acesso como `public`, `private` e `protected`.
+Este material apresenta os principais conceitos de **Orientação a Objetos** aplicados ao **TypeScript**. A proposta da aula é explicar, de forma gradual, o que são **classes** e **objetos**, como declarar **atributos** e **métodos**, como criar instâncias com `new` e como utilizar os modificadores de acesso `public`, `private` e `protected`.
 
 ---
 
-## 1. Orientação a objetos
-
-A orientação a objetos é uma técnica de programação baseada na construção e utilização de objetos.
-
-Um objeto combina:
-
-- **dados**, que representam seu estado ou suas características;
-- **operações**, que representam seus comportamentos.
-
-Em outras palavras, um objeto reúne informações e ações relacionadas a uma mesma responsabilidade.
-
-Um sistema orientado a objetos é formado por um conjunto de objetos que interagem entre si para produzir os resultados desejados.
-
-### Por que usar orientação a objetos?
-
-A programação orientada a objetos traz diversas vantagens, entre elas:
-
-- **organização do código**, pois cada classe possui responsabilidades bem definidas;
-- **reusabilidade**, já que uma classe pode ser utilizada em diferentes situações;
-- **facilidade de manutenção**, pois alterações em uma parte do sistema tendem a impactar menos as demais;
-- **maior clareza**, porque o código pode representar entidades do mundo real ou conceitos do sistema.
+## Sumário
+- [0) O que é Orientação a Objetos?](#0-o-que-é-orientação-a-objetos)
+- [1) Classes e objetos](#1-classes-e-objetos)
+- [2) Declarando classes em TypeScript](#2-declarando-classes-em-typescript)
+- [3) Construtor e instanciação com `new`](#3-construtor-e-instanciação-com-new)
+- [4) Atributos e métodos](#4-atributos-e-métodos)
+- [5) Modificadores de acesso em TypeScript](#5-modificadores-de-acesso-em-typescript)
+- [6) Exemplo completo: conta corrente](#6-exemplo-completo-conta-corrente)
+- [7) Exemplo para executar em sala](#7-exemplo-para-executar-em-sala)
+- [8) Exercícios sugeridos](#8-exercícios-sugeridos)
+- [Resumo para estudo](#resumo-para-estudo)
 
 ---
 
-## 2. Classes e objetos
+## 0) O que é Orientação a Objetos?
 
-Todo objeto pertence a um tipo específico. Em orientação a objetos, esse tipo é chamado de **classe**.
+A **Orientação a Objetos (OO)** é uma forma de organizar programas com base em **objetos**.
 
-A classe funciona como um **modelo** para a criação de objetos. Ela descreve:
+Um objeto reúne:
+- **dados**, que representam suas características;
+- **ações**, que representam seus comportamentos.
 
-- os **atributos** da entidade;
-- os **métodos** ou comportamentos da entidade.
+Em outras palavras, um objeto agrupa informações e operações relacionadas a uma mesma responsabilidade.
 
-### Exemplos de classes
+Esse modelo ajuda a representar melhor elementos do mundo real ou entidades do sistema, tornando o código mais organizado e mais fácil de manter.
 
-Podemos pensar em várias classes do cotidiano ou de um sistema:
+### Por que usar Orientação a Objetos?
 
-- `ContaCorrente`
-- `Automovel`
-- `Camisa`
-- `Cachorro`
-- `Aluno`
+Entre as principais vantagens, podemos destacar:
 
-Cada uma dessas classes define um conjunto de características e comportamentos específicos.
+- **organização do código**, pois cada classe possui responsabilidades mais bem definidas;
+- **reutilização**, já que uma classe pode ser usada para criar vários objetos;
+- **manutenção facilitada**, porque alterações tendem a ficar mais localizadas;
+- **clareza**, pois o sistema pode ser modelado com entidades mais próximas da realidade.
+
+---
+
+## 1) Classes e objetos
+
+Em programação orientada a objetos, uma **classe** funciona como um **modelo** para a criação de objetos.
+
+Ela define:
+- quais serão os **atributos** da entidade;
+- quais serão os **métodos** ou comportamentos disponíveis.
+
+Já o **objeto** é uma instância criada a partir dessa classe.
 
 ### Exemplo conceitual
 
-Em um banco, existem várias contas-corrente. Cada uma pertence a uma pessoa diferente e possui saldo e histórico próprios. No entanto, todas compartilham características e comportamentos em comum, como depositar, sacar e consultar saldo.
+Pense em uma classe chamada `ContaCorrente`.
 
-Nesse caso:
+Essa classe pode definir atributos como:
+- `titular`;
+- `saldo`.
 
-- **classe**: `ContaCorrente`
-- **objetos**: cada conta criada a partir dessa classe
+E também métodos como:
+- `depositar()`;
+- `sacar()`;
+- `exibirSaldo()`.
+
+A partir dessa classe, podem ser criados vários objetos diferentes, cada um com seus próprios valores.
+
+Exemplo:
+- uma conta de Marina;
+- uma conta de Paulo;
+- uma conta de Carlos.
+
+Todos esses objetos pertencem à mesma classe, mas cada um possui seu próprio estado.
 
 ---
 
-## 3. Declaração de classes em TypeScript
+## 2) Declarando classes em TypeScript
 
 Em TypeScript, usamos a palavra-chave `class` para declarar uma classe.
 
@@ -81,7 +87,7 @@ class NomeDaClasse {
 }
 ```
 
-### Exemplo
+### Exemplo inicial
 
 ```ts
 class Pessoa {
@@ -95,15 +101,37 @@ Nesse exemplo, a classe `Pessoa` possui dois atributos:
 - `nome`, do tipo `string`;
 - `idade`, do tipo `number`.
 
+### Convenção de nomenclatura
+
+Em TypeScript, é recomendável usar **PascalCase** para nomes de classes, ou seja, cada palavra começa com letra maiúscula.
+
+Exemplos:
+
+```ts
+class ContaCorrente {}
+class AlunoSistema {}
+class ProdutoLoja {}
+```
+
+Exemplos não recomendados:
+
+```ts
+class contaCorrente {}
+class aluno_sistema {}
+class produto1 {}
+```
+
 ---
 
-## 4. Variáveis de instância e criação de objetos
+## 3) Construtor e instanciação com `new`
 
-Depois de declarar uma classe, podemos criar objetos a partir dela. Esse processo é chamado de **instanciação**.
+Depois de declarar uma classe, precisamos criar objetos a partir dela. Esse processo é chamado de **instanciação**.
 
 Em TypeScript, normalmente usamos o operador `new`.
 
-### Exemplo simples
+Além disso, muitas classes possuem um **construtor**, que é o método especial responsável por inicializar os atributos do objeto no momento da criação.
+
+### Exemplo
 
 ```ts
 class Pessoa {
@@ -119,112 +147,89 @@ class Pessoa {
 const p1 = new Pessoa("Ana", 20);
 const p2 = new Pessoa("Carlos", 35);
 
-console.log(p1.nome); // Ana
-console.log(p2.idade); // 35
+console.log(p1.nome);
+console.log(p2.idade);
 ```
 
 ### Explicação
 
-- `class Pessoa` define o modelo;
-- `constructor(...)` é o construtor da classe;
+- `class Pessoa` declara o modelo do objeto;
+- `constructor(...)` recebe os valores iniciais;
 - `this.nome` e `this.idade` referem-se aos atributos do próprio objeto;
-- `new Pessoa("Ana", 20)` cria um novo objeto da classe `Pessoa`.
+- `new Pessoa("Ana", 20)` cria uma nova instância da classe.
 
 ---
 
-## 5. Exemplo prático: classe ContaCorrente
+## 4) Atributos e métodos
+
+Os **atributos** armazenam o estado do objeto.
+
+Os **métodos** definem os comportamentos que o objeto pode executar.
+
+### Exemplo: classe `Produto`
 
 ```ts
-class ContaCorrente {
-  titular: string;
-  saldo: number;
+class Produto {
+  nome: string;
+  preco: number;
+  estoque: number;
 
-  constructor(titular: string, saldoInicial: number) {
-    this.titular = titular;
-    this.saldo = saldoInicial;
+  constructor(nome: string, preco: number, estoque: number) {
+    this.nome = nome;
+    this.preco = preco;
+    this.estoque = estoque;
   }
 
-  depositar(valor: number): void {
-    this.saldo += valor;
+  adicionarEstoque(qtd: number): void {
+    this.estoque += qtd;
   }
 
-  sacar(valor: number): void {
-    if (valor <= this.saldo) {
-      this.saldo -= valor;
+  removerEstoque(qtd: number): void {
+    if (qtd <= this.estoque) {
+      this.estoque -= qtd;
     } else {
-      console.log("Saldo insuficiente.");
+      console.log("Quantidade indisponível em estoque.");
     }
   }
 
-  exibirSaldo(): void {
-    console.log(`Titular: ${this.titular}`);
-    console.log(`Saldo atual: R$ ${this.saldo.toFixed(2)}`);
+  exibirProduto(): void {
+    console.log(`Produto: ${this.nome}`);
+    console.log(`Preço: R$ ${this.preco.toFixed(2)}`);
+    console.log(`Estoque: ${this.estoque}`);
   }
 }
 
-const conta1 = new ContaCorrente("Marina", 1000);
-conta1.depositar(250);
-conta1.sacar(100);
-conta1.exibirSaldo();
+const produto1 = new Produto("Mouse", 89.9, 10);
+produto1.adicionarEstoque(5);
+produto1.removerEstoque(3);
+produto1.exibirProduto();
 ```
 
 ### O que observar nesse exemplo?
 
-A classe `ContaCorrente` possui:
+A classe `Produto` possui:
 
-- **atributos**: `titular` e `saldo`;
-- **métodos**: `depositar`, `sacar` e `exibirSaldo`;
-- **construtor**: responsável por inicializar o objeto.
-
----
-
-## 6. Denominação de classes
-
-Ao declarar classes, recomenda-se seguir um padrão de nomenclatura.
-
-### Boas práticas
-
-- o nome da classe deve começar com letra maiúscula;
-- em nomes compostos, cada palavra deve iniciar com letra maiúscula;
-- esse padrão é conhecido como **PascalCase**.
-
-### Exemplos corretos
-
-```ts
-class ContaCorrente {}
-class AlunoSistema {}
-class ProdutoLoja {}
-```
-
-### Exemplos não recomendados
-
-```ts
-class contaCorrente {}
-class aluno_sistema {}
-class produto1 {}
-```
-
-Embora alguns desses nomes possam funcionar, não seguem o padrão mais adequado para classes.
+- **atributos**: `nome`, `preco` e `estoque`;
+- **métodos**: `adicionarEstoque`, `removerEstoque` e `exibirProduto`;
+- **construtor**: usado para inicializar o objeto no momento da criação.
 
 ---
 
-## 7. Visibilidade em TypeScript
+## 5) Modificadores de acesso em TypeScript
 
-A visibilidade, também chamada de acessibilidade, é importante porque permite controlar quais partes da classe podem ser acessadas de fora dela.
+Os modificadores de acesso permitem controlar quais membros da classe podem ser acessados fora dela.
 
-Esse controle ajuda a implementar o **encapsulamento**, que consiste em proteger os dados internos e expor apenas o que for necessário.
+Esse controle está relacionado ao conceito de **encapsulamento**, que ajuda a proteger os dados internos do objeto.
 
-### Modificadores de acesso em TypeScript
-
-TypeScript possui os seguintes modificadores principais:
+Os modificadores mais usados em TypeScript são:
 
 - `public`
 - `private`
 - `protected`
 
-> Observação: diferente de Java, TypeScript não possui o modificador de acesso de pacote (`package`). Além disso, quando nenhum modificador é informado, o membro é `public` por padrão.
+> Observação: em TypeScript, quando nenhum modificador é informado, o membro é `public` por padrão.
 
-### 7.1 `public`
+### 5.1 `public`
 
 O membro pode ser acessado livremente fora da classe.
 
@@ -241,7 +246,7 @@ const aluno = new Aluno("João");
 console.log(aluno.nome);
 ```
 
-### 7.2 `private`
+### 5.2 `private`
 
 O membro só pode ser acessado dentro da própria classe.
 
@@ -260,12 +265,12 @@ class Cofre {
 
 const cofre = new Cofre("1234");
 console.log(cofre.verificarSenha("1234"));
-// console.log(cofre.senha); // erro: atributo privado
+// console.log(cofre.senha); // erro
 ```
 
-### 7.3 `protected`
+### 5.3 `protected`
 
-O membro pode ser acessado dentro da classe e também por subclasses.
+O membro pode ser acessado na própria classe e também nas subclasses.
 
 ```ts
 class Animal {
@@ -284,10 +289,10 @@ class Cachorro extends Animal {
 
 const dog = new Cachorro("Rex");
 dog.latir();
-// console.log(dog.nome); // erro: protected não pode ser acessado fora da classe/subclasse
+// console.log(dog.nome); // erro
 ```
 
-### Resumo da visibilidade
+### Resumo dos modificadores
 
 | Modificador | Acesso na própria classe | Acesso fora da classe | Acesso em subclasses |
 |---|---:|---:|---:|
@@ -297,48 +302,12 @@ dog.latir();
 
 ---
 
-## 8. Campos (fields) ou atributos
+## 6) Exemplo completo: conta corrente
 
-Os campos, também chamados de atributos, são variáveis declaradas dentro da classe. Eles armazenam o estado do objeto.
-
-### Sintaxe geral
+O exemplo abaixo reúne os conceitos principais vistos até aqui.
 
 ```ts
-class Exemplo {
-  modificador nomeDoCampo: tipo;
-}
-```
-
-### Exemplo
-
-```ts
-class Produto {
-  nome: string;
-  preco: number;
-  estoque: number;
-
-  constructor(nome: string, preco: number, estoque: number) {
-    this.nome = nome;
-    this.preco = preco;
-    this.estoque = estoque;
-  }
-}
-```
-
-Nesse caso:
-
-- `nome` armazena o nome do produto;
-- `preco` armazena o valor do produto;
-- `estoque` armazena a quantidade disponível.
-
----
-
-## 9. Exemplo completo com atributos privados
-
-Em muitos casos, não é desejável deixar todos os atributos públicos. Veja um exemplo com encapsulamento.
-
-```ts
-class ContaBancaria {
+class ContaCorrente {
   private saldo: number;
   public titular: string;
 
@@ -364,36 +333,32 @@ class ContaBancaria {
   consultarSaldo(): number {
     return this.saldo;
   }
+
+  exibirDados(): void {
+    console.log(`Titular: ${this.titular}`);
+    console.log(`Saldo: R$ ${this.saldo.toFixed(2)}`);
+  }
 }
 
-const conta = new ContaBancaria("Paulo", 500);
-conta.depositar(200);
-console.log(conta.consultarSaldo()); // 700
-console.log(conta.sacar(100)); // true
-console.log(conta.consultarSaldo()); // 600
-// console.log(conta.saldo); // erro: saldo é privado
+const conta = new ContaCorrente("Marina", 1000);
+conta.depositar(250);
+console.log(conta.sacar(100));
+conta.exibirDados();
+console.log(conta.consultarSaldo());
 ```
 
-### Vantagem desse modelo
+### O que esse exemplo mostra?
 
-Ao deixar `saldo` como `private`, impedimos que qualquer parte do código altere esse valor diretamente. Assim, o saldo só pode ser modificado pelos métodos da classe, o que torna o sistema mais seguro e organizado.
-
----
-
-## 10. Comparando a ideia com Java
-
-A estrutura conceitual da orientação a objetos em TypeScript é muito semelhante à de Java:
-
-- ambas usam `class`;
-- ambas permitem criar objetos com `new`;
-- ambas utilizam atributos e métodos;
-- ambas possuem modificadores de acesso como `public`, `private` e `protected`.
-
-A principal diferença, neste contexto introdutório, é que TypeScript é uma linguagem amplamente usada no desenvolvimento web e adiciona tipagem estática sobre JavaScript.
+- uso de **classe**;
+- criação de **atributos**;
+- uso de **construtor**;
+- criação de **métodos**;
+- uso de `private` para proteger o saldo;
+- instanciação com `new`.
 
 ---
 
-## 11. Exemplo para executar em sala
+## 7) Exemplo para executar em sala
 
 ```ts
 class Carro {
@@ -441,7 +406,7 @@ carro1.exibirDados();
 
 ---
 
-## 12. Exercícios sugeridos
+## 8) Exercícios sugeridos
 
 ### Exercício 1
 Crie uma classe `Aluno` com os atributos:
@@ -453,7 +418,7 @@ Crie uma classe `Aluno` com os atributos:
 Implemente um método `situacao()` que informe se o aluno está aprovado ou reprovado.
 
 ### Exercício 2
-Crie uma classe `Produto` com:
+Crie uma classe `Produto` com os atributos:
 
 - `nome`
 - `preco`
@@ -466,7 +431,7 @@ Implemente os métodos:
 - `exibirProduto()`
 
 ### Exercício 3
-Crie uma classe `Retangulo` com:
+Crie uma classe `Retangulo` com os atributos:
 
 - `base`
 - `altura`
@@ -478,54 +443,13 @@ Implemente os métodos:
 
 ---
 
-## 13. Conclusão
+## Resumo para estudo
 
-A orientação a objetos permite modelar melhor os elementos de um sistema por meio de classes e objetos.
-
-Em TypeScript, podemos trabalhar com:
-
-- classes;
-- atributos;
-- métodos;
-- construtores;
-- instanciação com `new`;
-- controle de acesso com `public`, `private` e `protected`.
-
-Esses conceitos são fundamentais para a construção de sistemas organizados, reutilizáveis e de fácil manutenção.
-
----
-
-## 14. Exemplo final consolidado
-
-```ts
-class Pessoa {
-  private idade: number;
-  public nome: string;
-
-  constructor(nome: string, idade: number) {
-    this.nome = nome;
-    this.idade = idade;
-  }
-
-  fazerAniversario(): void {
-    this.idade++;
-  }
-
-  apresentar(): void {
-    console.log(`Olá, meu nome é ${this.nome} e tenho ${this.idade} anos.`);
-  }
-}
-
-const pessoa1 = new Pessoa("Lucia", 28);
-pessoa1.apresentar();
-pessoa1.fazerAniversario();
-pessoa1.apresentar();
-```
-
-Esse exemplo reúne os principais conceitos vistos na aula:
-
-- declaração de classe;
-- atributos públicos e privados;
-- construtor;
-- métodos;
-- criação de objeto.
+- **Orientação a Objetos** organiza programas com base em classes e objetos.
+- **Classe** é o modelo; **objeto** é a instância criada a partir desse modelo.
+- Em TypeScript, usamos `class` para declarar classes e `new` para criar objetos.
+- **Atributos** armazenam dados do objeto.
+- **Métodos** representam comportamentos do objeto.
+- O **construtor** inicializa os valores no momento da criação.
+- Os modificadores `public`, `private` e `protected` ajudam no controle de acesso e no encapsulamento.
+- Esses conceitos são fundamentais para o desenvolvimento de sistemas mais organizados, reutilizáveis e fáceis de manter.
