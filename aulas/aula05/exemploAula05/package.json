@@ -1,0 +1,24 @@
+{
+  "name": "exemploaula05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+   "scripts": {
+    "build": "tsc",
+    "dev:01": "ts-node src/01-metodos.ts",
+    "dev:02": "ts-node src/02-encapsulamento.ts",
+    "dev:03": "ts-node src/03-construtor.ts",
+    "dev:04": "ts-node src/04-get-set.ts",
+    "dev:05": "ts-node src/05-heranca.ts",
+    "dev:06": "ts-node src/06-conta-bancaria.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  }
+}

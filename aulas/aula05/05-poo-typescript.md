@@ -153,6 +153,116 @@ A assinatura conceitual do método acima é:
 somar(number, number)
 ```
 
+### 4.1 Sobrecarga de métodos
+
+A **sobrecarga de métodos** acontece quando usamos o **mesmo nome de método**, mas com **assinaturas diferentes**.
+
+Em Java, normalmente escrevemos vários métodos com o mesmo nome e implementações separadas.
+
+Em TypeScript, o funcionamento é um pouco diferente:
+
+- podemos declarar **várias assinaturas** para o mesmo método;
+- porém, deve existir **apenas uma única implementação real**.
+
+### Exemplo
+
+```ts
+class Saudacao {
+  public exibir(nome: string): void;
+  public exibir(nome: string, titulo: string): void;
+
+  public exibir(nome: string, titulo?: string): void {
+    if (titulo) {
+      console.log(`Olá, ${titulo} ${nome}!`);
+    } else {
+      console.log(`Olá, ${nome}!`);
+    }
+  }
+}
+
+const s = new Saudacao();
+s.exibir("Nelson");
+s.exibir("Nelson", "Professor");
+```
+
+### Explicação
+
+Nas duas primeiras declarações, temos as **assinaturas** do método:
+
+```ts
+public exibir(nome: string): void;
+public exibir(nome: string, titulo: string): void;
+```
+
+Essas linhas informam ao TypeScript que o método `exibir` pode ser chamado de duas formas:
+
+- com apenas `nome`;
+- com `nome` e `titulo`.
+
+Depois disso, escrevemos a **implementação única**:
+
+```ts
+public exibir(nome: string, titulo?: string): void {
+  if (titulo) {
+    console.log(`Olá, ${titulo} ${nome}!`);
+  } else {
+    console.log(`Olá, ${nome}!`);
+  }
+}
+```
+
+Nessa implementação:
+
+- `titulo?: string` indica que o segundo parâmetro é opcional;
+- o método decide internamente qual comportamento executar.
+
+### Saída esperada
+
+```ts
+Olá, Nelson!
+Olá, Professor Nelson!
+```
+
+### Importante
+
+Em TypeScript, isto **não é permitido**:
+
+```ts
+class Exemplo {
+  public teste(nome: string): void {
+    console.log(nome);
+  }
+
+  public teste(nome: string, idade: number): void {
+    console.log(nome, idade);
+  }
+}
+```
+
+Isso acontece porque o TypeScript não permite **duas implementações reais** do mesmo método na classe.
+
+O correto é declarar várias assinaturas e manter **um único corpo de método**.
+
+### Relação com a assinatura
+
+A sobrecarga depende justamente da **assinatura do método**.
+
+Ou seja, mudamos:
+
+- a quantidade de parâmetros;
+- ou os tipos dos parâmetros.
+
+Apenas mudar o tipo de retorno **não caracteriza** uma nova sobrecarga.
+
+Por exemplo, isso não seria uma sobrecarga válida conceitualmente:
+
+```ts
+metodo(valor: number): string
+metodo(valor: number): boolean
+```
+
+Perceba que os parâmetros continuam os mesmos.
+
 ---
 
 ## 5. Tipos de métodos
