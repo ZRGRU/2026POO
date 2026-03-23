@@ -8,6 +8,12 @@ Embora muitos conceitos sejam os mesmos vistos em Java, a sintaxe e alguns compo
 
 ---
 
+## Projeto com exemplos
+
+Os arquivos de exemplo desta aula estão disponíveis na pasta [`exemplo`](./exemplo/). Nessa pasta você encontrará um projeto TypeScript pronto, com `package.json`, `tsconfig.json` e os códigos utilizados ao longo da aula.
+
+---
+
 ## 1. Métodos
 
 Os **métodos** são funções declaradas dentro de uma classe.
