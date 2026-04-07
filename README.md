@@ -43,6 +43,7 @@ Aplicação dos conceitos usando uma linguagem orientada a objetos.
 
 ## Atividades (links)
 - [Atv01 - 1º Bim](./atividades/Bim01/atv01.md)
+- [Atv02 - 1º Bim](./atividades/Bim01/atv02.md)
 
 ---
 
