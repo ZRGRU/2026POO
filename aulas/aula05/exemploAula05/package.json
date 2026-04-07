@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-   "scripts": {
+  "scripts": {
     "build": "tsc",
     "dev:01": "ts-node src/01-metodos.ts",
     "dev:02": "ts-node src/02-encapsulamento.ts",
-    "dev:03": "ts-node src/03-construtor.ts",
-    "dev:04": "ts-node src/04-get-set.ts",
-    "dev:05": "ts-node src/05-heranca.ts",
-    "dev:06": "ts-node src/06-conta-bancaria.ts"
+    "dev:03": "ts-node src/03-saudacao.ts",
+    "dev:03-1": "ts-node src/03-saudacao2.ts",
+    "dev:04": "ts-node src/04-lampada.ts",
+    "dev:05": "ts-node src/05-pessoa.ts",
+    "dev:06": "ts-node src/06-metodoCriacao.ts",
+    "dev:07": "ts-node src/07-metodoDestruicao.ts",
+    "dev:08": "ts-node src/08-produtos.ts",
+    "dev:09": "ts-node src/09-temperatura.ts"
   },
   "keywords": [],
   "author": "",

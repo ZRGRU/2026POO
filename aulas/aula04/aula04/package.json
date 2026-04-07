@@ -1,0 +1,25 @@
+{
+  "name": "aula04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "dev:pessoa": "ts-node src/pessoa.ts",
+    "dev:produto": "ts-node src/produto.ts",
+    "dev:conta": "ts-node src/conta.ts",
+    "dev:carro": "ts-node src/carro.ts"
+   
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
